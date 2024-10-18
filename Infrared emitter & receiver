@@ -1,0 +1,51 @@
+#include <IRremote.hpp>
+// set up sensors and electronics to pins
+int blue = 5;
+int button = 2;
+int IRemit = 10;
+int IRrec = 13; 
+IRsend irsend(IRemit); // IR emitter on pin 10
+IRrecv irrecv(IRrec);  // IR receiver on pin 13
+decode_results results;  // Variable used to store the decoded results
+
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(blue, OUTPUT);
+  pinMode(button, INPUT);
+  Serial.begin(9600);
+  irrecv.enableIRIn(); // Enables IR receiver
+}
+
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(digitalRead(button)==HIGH){
+    unsigned long data = 0x1;
+    irsend.sendSony(data, 16); //signal sent from the IR emitter
+    delay(50);
+    if (irrecv.decode()) {
+      // Print the received IR code in hexadecimal format
+      if(results.value = 0x1){
+        //Checks to see what signal was recieved
+        digitalWrite(blue, HIGH);
+        Serial.println("Data was received");
+      }
+      else{
+        digitalWrite(blue, LOW);
+        Serial.println("Data was not received");
+      }
+    }
+  }
+  else{
+    Serial.println("IR emitter not read");
+    digitalWrite(blue, LOW);
+  }
+ 
+  delay(1000);
+  irrecv.resume();
+}
+
+
