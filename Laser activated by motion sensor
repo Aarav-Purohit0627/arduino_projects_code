@@ -1,0 +1,16 @@
+int laser = 2;//attach laser to pin 2
+int motionSensor = 7;//attach motion sensor to pin 7
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);//start serial monitor
+  pinMode(laser, OUTPUT);//set up the laser to receive an output value
+  pinMode(motionSensor, INPUT);//set up the motion sensor to give an input value
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(laser, digitalRead(motionSensor));//if the motion sensor detects movement, the laser will turn on
+  Serial.println(digitalRead(motionSensor));//check to see what the motion sensor sees in the serial monitor
+  delay(3000);
+}
