@@ -1,0 +1,18 @@
+int gasSensor = A0;//attach MQ135 gas sensor to pin A0
+int redLight = 3;//attach red LED light to pin 2
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);//start serial monitor
+  pinMode(redLight, OUTPUT);//set up the LED light to receive an output value
+  pinMode(gasSensor, INPUT);//set up the MQ135 gas sensor to give an input value
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(redLight, LOW);//set the red LED to off
+  int gasValue = analogRead(gasSensor);//store the analog value of the MQ135 gas sensor in an integer variable
+  Serial.println(gasValue);
+  if(gasVal>=400) digitalWrite(redLight, HIGH);//if the value read is above 400, the air quality is most likely dangerous
+  delay(1000);
+}
