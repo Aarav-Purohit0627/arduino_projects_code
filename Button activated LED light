@@ -1,0 +1,15 @@
+int blueLight = 3;//attach LED light to pin 2
+int button = 2;//attach button to pin 7
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);//start serial monitor
+  pinMode(blueLight, OUTPUT);//set up the LED light to receive an output value
+  pinMode(button, INPUT);//set up the button to give an input value
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(blueLight, digitalRead(button));//if the motion sensor detects movement, the laser will turn on
+  delay(500);
+}
