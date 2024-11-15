@@ -1,0 +1,27 @@
+int trig = 8;//attach HC-SR04 ultrasonic sensor trig pin to pin 8
+int echo = 9;//attach HC-SR04 ultrasonic sensor echo pin to pin 9
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);//start serial monitor
+  pinMode(trig, OUTPUT);//set up the trig pin as an output
+  pinMode(echo, INPUT);//set up the echo pin as an input
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(trig, LOW);
+  digitalWrite(trig, HIGH);//send out a ultrasonic pulse
+  digitalWrite(trig, LOW);
+  double duration = pulseIn(echo, HIGH);//read the pulse and measure the time difference
+
+  int cm = (duration / 2.0) / 29.1;//convert the time to centimeters
+  int inches = (duration / 2.0) / 74.0;//convert the time to inches
+  Serial.print("inches: ");
+  Serial.print(inches);
+  Serial.print(" cm: ");
+  Serial.print(cm);
+  Serial.print(" ");
+  Serial.println(duration);
+  delay(500);
+}
